@@ -14,7 +14,20 @@ class Controls {
                 case "ArrowDown":
                     this.reverse = true
                     break
+                case "w":
+                    this.forward = true
+                    break
+                case "d":
+                    this.right = true
+                    break
+                case "s":
+                    this.reverse = true
+                    break
+                case "a":
+                    this.left = true
+                    break
             }
+            console.table(this)
         }
 
         document.onkeyup = (event) => {
@@ -31,9 +44,19 @@ class Controls {
                 case "ArrowDown":
                     this.reverse = false
                     break
+                case "w":
+                    this.forward = false
+                    break
+                case "d":
+                    this.right = false
+                    break
+                case "s":
+                    this.reverse = false
+                    break
+                case "a":
+                    this.left = false
+                    break
             }
-
-            //console.table(this)
         }
     }
 
