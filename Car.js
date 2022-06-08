@@ -1,5 +1,6 @@
 class Car {
     constructor (x, y, width, height) {
+
         this.x = x
         this.y = y
         this.width = width
@@ -14,6 +15,7 @@ class Car {
     }
 
     #move() {
+
         if (this.controls.forward) {
             this.speed += this.acceleration
         }
@@ -39,6 +41,7 @@ class Car {
         
         
         if (this.speed != 0) {
+
             const flip = this.speed >= 0? 1: -1
 
             if (this.controls.left) {
@@ -55,10 +58,12 @@ class Car {
     }
 
     update() {
+        
         this.#move()
     }
     //ctx is the context we're drawing the car in
     draw(ctx) {
+        
         ctx.save()
         ctx.translate(this.x, this.y)
         ctx.rotate(-this.angle)

@@ -1,5 +1,6 @@
 class Road {
     constructor(x, width, laneCount = 3) {
+        
         this.x = x
         this.width = width
         this.laneCount = laneCount
@@ -50,7 +51,7 @@ class Road {
         ctx.setLineDash([])
 
         this.borders.forEach(border => {
-
+            //border is either the left or the right border, the 0 index is the top, the 1 index is the bottom
             ctx.beginPath()
             ctx.moveTo(border[0].x, border[0].y)
             ctx.lineTo(border[1].x, border[1].y)
