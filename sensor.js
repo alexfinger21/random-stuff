@@ -20,6 +20,7 @@ class Sensor {
             ) + this.car.angle
 
             const start = {x: this.car.x, y: this.car.y}
+            //we subtrtact math.sin and math.cos because to move up you have to subtract and to move to the left you have to subtract (the angle increments when turning to the left)
             const end = {x: this.car.x - Math.sin(rayAngle) * this.rayLength, y: this.car.y - Math.cos(rayAngle) * this.rayLength}
 
             this.rays.push([start, end])
