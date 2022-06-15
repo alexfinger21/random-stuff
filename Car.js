@@ -59,10 +59,10 @@ class Car {
         this.y -= Math.cos(this.angle) * this.speed
     }
 
-    update() {
+    update(roadBorders) {
         
         this.#move()
-        this.sensor.update()
+        this.sensor.update(roadBorders)
     }
     //ctx is the context we're drawing the car in
     draw(ctx) {

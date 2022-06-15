@@ -27,7 +27,6 @@ class Controls {
                     this.left = true
                     break
             }
-            console.table(this)
         }
 
         document.onkeyup = (event) => {

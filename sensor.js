@@ -1,5 +1,5 @@
 class Sensor {
-    constructor(car, rayCount = 3, rayLength = 100) {
+    constructor(car, rayCount = 5, rayLength = 100) {
 
         this.car = car
         this.rayCount = rayCount
@@ -7,9 +7,10 @@ class Sensor {
         this.raySpread = Math.PI/2 //45 deg
 
         this.rays = []
+        this.readings = []
     }
 
-    update() {
+    #castRays() {
         this.rays = []
 
         for (let i = 0; i<this.rayCount; i++) {
@@ -27,9 +28,50 @@ class Sensor {
         }
     }
 
+    #getReading(ray, roadBorders) {
+        let touches = []
+
+        for (let i = 0; i<roadBorders.length; i++) {
+            const touch = getIntersection( //ray[0] is the beginning of the ray while ray[1] is the ending of the ray
+                ray[0], ray[1], roadBorders[i][0], roadBorders[i][1]
+            )
+
+            if (touch) {
+                touches.push(touch)
+            }
+        }
+
+        if (touches.length == 0) {
+            return null
+        } else {
+               
+            const offsets = touches.map(e => e.offset) //e is the element, and it goes through all the elements 
+            const minOffset = Math.min(...offsets)
+            return  touches.find(e => e.offset == minOffset)
+        }
+    }
+
+    update(roadBorders) {
+        this.#castRays()
+        this.readings = []
+
+        for (let i = 0; i<this.rays.length; i++) {
+            this.readings.push(
+                this.#getReading(this.rays[i], roadBorders)
+            )
+        }
+    }
+
     draw(ctx) {
         for (let i = 0; i<this.rayCount; i++) {
 
+            let end = this.rays[i][1]
+
+            if (this.readings[i]) {
+                end = this.readings[i]
+            }
+
+            //where the actual line reaches
             ctx.beginPath()
             ctx.lineWidth = 2
             ctx.strokeStyle = "blue"
@@ -40,11 +82,29 @@ class Sensor {
             )
             
             ctx.lineTo(
-                this.rays[i][1].x,
-                this.rays[i][1].y
+                end.x,
+                end.y
             )
 
             ctx.stroke()
+
+            //additional line that shows the whole ray
+            ctx.beginPath()
+            ctx.lineWidth = 2
+            ctx.strokeStyle = "yellow"
+            
+            ctx.moveTo(
+                this.rays[i][1].x,
+                this.rays[i][1].y
+            )
+            
+            ctx.lineTo(
+                end.x,
+                end.y
+            )
+
+            ctx.stroke()
+
         }
     }
 }
