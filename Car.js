@@ -60,6 +60,7 @@ class Car {
     #createPolygon() {
         const points = []
         const rad = Math.sqrt(Math.pow((this.width/2), 2) + Math.pow((this.height/2), 2))
+        const alpha = Math.asin(this.width/2/rad)
     }
 
     update(roadBorders) {
