@@ -39,8 +39,6 @@ class Car {
         if (Math.abs(this.speed) <= 0.01) {
             this.speed = 0
         }
-
-        
         
         if (this.speed != 0) {
 
@@ -57,6 +55,11 @@ class Car {
 
         this.x -= Math.sin(this.angle) * this.speed
         this.y -= Math.cos(this.angle) * this.speed
+    }
+
+    #createPolygon() {
+        const points = []
+        const rad = Math.sqrt(Math.pow((this.width/2), 2) + Math.pow((this.height/2), 2))
     }
 
     update(roadBorders) {
