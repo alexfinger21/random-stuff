@@ -59,12 +59,19 @@ class Controls {
         }
     }
 
-    constructor() {
+    constructor(controlType) {
         this.forward = false
         this.reverse = false
         this.left = false
         this.right = false
 
-        this.#addKeyboardListeners();
+        switch(controlType) {
+            case "KEYS":
+                this.#addKeyboardListeners()
+                break
+            case "DUMMY": 
+                this.forward = true //this basically handles all the acceleration n stuff (car.js handles it actually)
+                break
+        }
     }
 }
