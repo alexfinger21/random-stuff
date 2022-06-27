@@ -5,6 +5,10 @@ body {
     background-color: salmon;
 }
 
+#networkCanvas {
+    background-color: black;
+}
+
 #carCanvas {
     background-color: lightgrey;
 }
