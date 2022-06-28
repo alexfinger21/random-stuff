@@ -133,7 +133,7 @@ class Car {
         }
     }
     //ctx is the context we're drawing the car in
-    draw(ctx, color = "orange") {
+    draw(ctx, color = "orange",drawSensors = false) {
         
         if (this.damaged) {
             ctx.fillStyle = "gray"
@@ -151,7 +151,7 @@ class Car {
 
         ctx.fill()
 
-        if (this.sensor) {
+        if (this.sensor && drawSensors) {
             this.sensor.draw(ctx)
         }
     }
