@@ -10,6 +10,15 @@ console.log(window.innerWidth)
 const carCtx = carCanvas.getContext("2d")
 const networkCtx = networkCanvas.getContext("2d")
 
+const road = new Road(carCanvas.width/2, carCanvas.width*0.9)
+let cars = generateCars(100)
+let traffic = [
+    new Car(road.getLaneCenter(1), -100, 30, 50, "DUMMY")
+]
+
+let bestCar = cars[0]
+bestCar.brain = localStorage.getItem("bestBrain") ? JSON.parse(localStorage.getItem("bestBrain")) : bestCar.brain
+
 function generateCars(N) {
     let cars = []
 
@@ -20,11 +29,13 @@ function generateCars(N) {
     return cars
 }
 
-const road = new Road(carCanvas.width/2, carCanvas.width*0.9)
-let cars = generateCars(100)
-let traffic = [
-    new Car(road.getLaneCenter(1), -100, 30, 50, "DUMMY")
-]
+function save() {
+    localStorage.saveItem("bestBrain", JSON.stringify(bestCar.brain))
+}
+
+function discard() {
+    localStorage.removeItem("bestBrain")
+}
 
 function animate(time) {//time is how much time has passed since the programs started
 
@@ -33,7 +44,6 @@ function animate(time) {//time is how much time has passed since the programs st
     /* I could also do:
     bestCar = cars.find(c => c.y == Math.min(...cars.map(c => c.y)))
     */
-    console.log(bestCar)
 
     for (let i = 0; i<traffic.length; i++) {
         traffic[i].update(road.borders, [])
