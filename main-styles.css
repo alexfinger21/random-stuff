@@ -20,6 +20,10 @@ body {
     cursor: pointer;
  }
 
+button:hover {
+    background-color: yellowgreen;
+}
+
 #networkCanvas {
     background-color: black;
 }

@@ -44,7 +44,7 @@ class Level {
 
         this.weights = []
 
-        for (let i = 0; i<inputCount; i++) {
+        for (let i = 0; i<inputCount; i++) { //each input will have a weight on every output
             this.weights[i] = new Array(outputCount)
         }
 
@@ -68,5 +68,27 @@ class NeuralNetwork{//it all begins with this
         }
 
         return outputs
+    }
+
+    static mutate(network, amount = 1) {
+        network.levels.forEach(level => {
+            for (let i = 0; i<level.biases.length; i++) {
+                level.biases[i] = lerp(
+                    level.biases[i],
+                    Math.random() * 2 - 1,
+                    amount
+                )
+            }
+
+            for (let i = 0; i<level.inputs.length ; i++) {//the i is the amount of inputs, the j is the outputs b/c the weights are an array of outputs matched to an input
+                for (let j = 0; j < level.outputs.length; j++) {
+                    level.weights[i][j] = lerp(
+                        level.weights[i][j],
+                        Math.random() * 2 - 1,
+                        amount
+                    )
+                }
+            }
+        })
     }
 }
