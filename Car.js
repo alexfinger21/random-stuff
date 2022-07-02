@@ -142,6 +142,18 @@ class Car {
             ctx.fillStyle = color
         }
 
+        const img = new Image()
+        img.src = "./img/mustang top down.png"
+
+        //console.log(this.height)
+
+        ctx.save()
+        ctx.translate(this.x, this.y)
+        ctx.rotate(-this.angle)
+
+        ctx.drawImage(img,-this.width/2, -this.height/2, this.width, this.height);
+        
+        /*
         ctx.beginPath()
         ctx.moveTo(this.polygon[0].x, this.polygon[0].y)
 
@@ -150,6 +162,9 @@ class Car {
         }
 
         ctx.fill()
+        */
+
+        ctx.restore()
 
         if (this.sensor && drawSensors) {
             this.sensor.draw(ctx)

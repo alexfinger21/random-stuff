@@ -13,16 +13,21 @@ console.log(window.innerWidth)
 const carCtx = carCanvas.getContext("2d")
 const networkCtx = networkCanvas.getContext("2d")
 
+const car = {
+    x: Math.round(50*0.461538462),
+    y: 50
+}
+
 const road = new Road(carCanvas.width/2, carCanvas.width*0.9)
-let cars = generateCars(1000)
+let cars = generateCars(100)
 let traffic = [
-    new Car(road.getLaneCenter(1), -100, 30, 50, "DUMMY"),
-    new Car(road.getLaneCenter(2), -300, 30, 50, "DUMMY"),
-    new Car(road.getLaneCenter(0), -300, 30, 50, "DUMMY"),
-    new Car(road.getLaneCenter(0), -500, 30, 50, "DUMMY"),
-    new Car(road.getLaneCenter(1), -600, 30, 50, "DUMMY"),
-    new Car(road.getLaneCenter(2), -700, 30, 50, "DUMMY"),
-    new Car(road.getLaneCenter(0), -750, 30, 50, "DUMMY"),
+    new Car(road.getLaneCenter(1), -100, car.x, car.y, "DUMMY"),
+    new Car(road.getLaneCenter(2), -300, car.x, car.y, "DUMMY"),
+    new Car(road.getLaneCenter(0), -300, car.x, car.y, "DUMMY"),
+    new Car(road.getLaneCenter(0), -500, car.x, car.y, "DUMMY"),
+    new Car(road.getLaneCenter(1), -600, car.x, car.y, "DUMMY"),
+    new Car(road.getLaneCenter(2), -700, car.x, car.y, "DUMMY"),
+    new Car(road.getLaneCenter(0), -750, car.x, car.y, "DUMMY"),
 ]
 
 let bestCar = cars[0]
@@ -42,7 +47,7 @@ function generateCars(N) {
     let cars = []
 
     for (let i = 0; i<N; i++) {
-        cars.push(new Car(road.getLaneCenter(1), 100, 30, 50, "AI", 5))
+        cars.push(new Car(road.getLaneCenter(1), 100, car.x, car.y, "AI", 5))
     }
     
     return cars
