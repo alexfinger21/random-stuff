@@ -1,11 +1,12 @@
 class Car {
-    constructor (x, y, width, height, controlType, topSpeed = 3) {
+    constructor (x, y, width, height, controlType, topSpeed = 3, color = "#add8e6") {
 
         this.x = x
         this.y = y
         this.width = width
         this.height = height
-
+        this.color = color
+        
         this.speed = 0
         this.acceleration = 0.2
         this.topSpeed = topSpeed
@@ -18,6 +19,25 @@ class Car {
         if (controlType !== "DUMMY") {
             this.sensor = new Sensor(this)
             this.brain = new NeuralNetwork([this.sensor.rayCount, 6, 4])
+        }
+
+        this.img = new Image()
+        this.img.src = "./img/mustang top down.png"
+
+        this.mask = document.createElement("canvas")
+        this.mask.width = width
+        this.mask.height = height
+
+        this.maskCtx = this.mask.getContext("2d")
+
+        this.img.onload = () => {
+            this.maskCtx.fillStyle = color
+            this.maskCtx.rect(0, 0, width, height)
+            this.maskCtx.fill()
+
+            this.maskCtx.globalCompositeOperation = "destination-atop"
+            this.maskCtx.drawImage(this.img, 0, 0, this.width, this.height)
+
         }
 
         this.controls = new Controls(controlType)
@@ -142,16 +162,15 @@ class Car {
             ctx.fillStyle = color
         }
 
-        const img = new Image()
-        img.src = "./img/mustang top down.png"
-
         //console.log(this.height)
 
         ctx.save()
         ctx.translate(this.x, this.y)
         ctx.rotate(-this.angle)
 
-        ctx.drawImage(img,-this.width/2, -this.height/2, this.width, this.height);
+        ctx.drawImage(this.mask,-this.width/2, -this.height/2, this.width, this.height);
+        ctx.globalCompositeOperation = "multiply"
+        ctx.drawImage(this.img,-this.width/2, -this.height/2, this.width, this.height);
         
         /*
         ctx.beginPath()

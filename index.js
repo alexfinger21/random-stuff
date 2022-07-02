@@ -21,13 +21,13 @@ const car = {
 const road = new Road(carCanvas.width/2, carCanvas.width*0.9)
 let cars = generateCars(100)
 let traffic = [
-    new Car(road.getLaneCenter(1), -100, car.x, car.y, "DUMMY"),
-    new Car(road.getLaneCenter(2), -300, car.x, car.y, "DUMMY"),
-    new Car(road.getLaneCenter(0), -300, car.x, car.y, "DUMMY"),
-    new Car(road.getLaneCenter(0), -500, car.x, car.y, "DUMMY"),
-    new Car(road.getLaneCenter(1), -600, car.x, car.y, "DUMMY"),
-    new Car(road.getLaneCenter(2), -700, car.x, car.y, "DUMMY"),
-    new Car(road.getLaneCenter(0), -750, car.x, car.y, "DUMMY"),
+    new Car(road.getLaneCenter(1), -100, car.x, car.y, "DUMMY", 3, "orange"),
+    new Car(road.getLaneCenter(2), -300, car.x, car.y, "DUMMY", 3, "purple"),
+    new Car(road.getLaneCenter(0), -300, car.x, car.y, "DUMMY", 3, "cyan"),
+    new Car(road.getLaneCenter(1), -100, car.x, car.y, "DUMMY", 3, "orange"),
+    new Car(road.getLaneCenter(1), -600, car.x, car.y, "DUMMY", 3, "orange"),
+    new Car(road.getLaneCenter(2), -700, car.x, car.y, "DUMMY", 3, "orange"),
+    new Car(road.getLaneCenter(0), -750, car.x, car.y, "DUMMY", 3, "orange"),
 ]
 
 let bestCar = cars[0]
